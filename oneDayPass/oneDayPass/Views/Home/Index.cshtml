@@ -1,0 +1,213 @@
+﻿@{
+    ViewBag.Layout = "";
+
+
+}
+
+<div id="fillForm">
+    <form id="qnrForm" action="savePass" method="post">
+        <input type="hidden" name="op" value="0">
+        <div class="container">
+            <div class="jumbotron">
+                <h4>臺北科技大學 校園新冠肺炎健康關懷問卷 NTUT COVID-19 Survey</h4>
+                <p class="lead">
+                    您好，為因應「新冠肺炎」疫情，請協助我們填寫下列資料，並詳細閱讀注意事項。
+                    本校基於COVID-19防疫及事後追蹤需求，必須取得您的個人資料，個資當事人不得拒絕提供資料，並應確認資料正確性，如未提供個人資料，不得進入本校。
+                </p>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="fillCheck"></div>
+                    <div id="fillResult"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="anchor" id="formUserEdit"></span>
+                    <!-- form user info -->
+                    <div class="card card-outline-secondary">
+                        <div class="card-header">
+                            <h4 class="mb-0">基本資料 Basic information</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="text-center text-danger"><i class="fas fa-star"></i> 欄位必填</p>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"><i class="fas fa-star text-danger"></i> 姓名 Name</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" name="userName" placeholder="範例：李美美">
+                                    <small id="cnameHelp" class="form-text text-danger"><strong>出現「下列文字非big5編碼文字...」訊息時，難字可以用*表示</strong></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"><i class="fas fa-star text-danger"></i> 身分證號 ID</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" name="idNo" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"><i class="fas fa-star text-danger"></i> 手機號碼 Contact mobile phone </label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" name="mobile" placeholder="範例：0912123456">
+                                    <small id="mobile_phoneHelp" class="form-text text-danger"><strong>限台灣地區手機號碼</strong></small>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label"><i class="fas fa-star text-danger"></i> 所屬(或受邀)來訪之系所/單位 Your department (hosting department)/Administration</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" name="visitUnit">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">電子郵件 Email</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="email" name="email" placeholder="請輸入常用的電子郵件">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-lg-3 col-form-label form-control-label">聯絡地址 Contact Address</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control" type="text" name="address">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-group row text-danger text-center">
+                                <div class="col-sm-12" class="checkbox">
+                                    <h4><label><input type="checkbox" id="agree" name="agree" value="Y">　<strong>本人已確認上述個人資料正確性</strong></label></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /form user info -->
+                </div>
+                <!--/col-->
+            </div>
+
+            <div class="row mt-5 mb-5">
+                <div class="col-md-12">
+                    <span class="anchor" id="formHelthEdit"></span>
+                    <div class="card card-outline-secondary">
+                        <div class="card-header">
+                            <h3 class="mb-0">防疫聲明書</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <div class="col-sm-12 text-cenger text-danger">
+                                    <h4 class="text-danger">
+                                        本人未具中央流行疫情指揮中心所定具感染風險需追蹤情形(強制隔離、居家隔離、居家檢疫、自主健康管理情事)。如有任何隱瞞或違反相關防疫規定，願意接受法律制裁。
+                                    </h4>
+                                </div>
+                            </div>
+                            <hr>
+                            @*<div class="form-group row text-infor">
+                                <label class="col-lg-3 col-form-label form-control-label"><i class="fas fa-star text-danger"></i> 請輸入隨機碼</label>
+                                <div class="col-lg-9">
+
+                                    <div class="input-group mt-3 mb-3">
+                                        <img id="randomCodeImg" src='GetRandomCodeImage' />
+                                        <div class="input-group-append ml-3">
+                                            <button type="button" id="changeRandomCode" class="btn btn-success">換一張</button>
+                                        </div>
+                                    </div>
+                                    <input class="form-control" type="text" id="randomCode" name="randomCode">
+                                    <small id="randomCodeHelp" class="form-text text-danger"><strong>請注意英文大小寫</strong></small>
+                                </div>
+                            </div>*@
+                            <div class="form-group row">
+                                <div class="col-lg-12">
+                                    <button type="button" id="bsend" class="btn btn-lg btn-info btn-block">本人已充份瞭解上開告知事項內容，確認點此送出</button>
+                                    <!--  <button type="button" id="bout" class="btn  btn-danger btn-block mt-5">取消離開</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /form user info -->
+                </div>
+                <!--/col-->
+            </div>
+        </div>
+        <!--/container-->
+    </form>
+</div>
+
+
+<form action="LogOut" id="LogOut" method="post"></form>
+
+<!-- jQuery library -->
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <script type="text/javascript" src="https://font.ntut.edu.tw/wfs/js/lib/wfs.js"></script>
+    <script type="text/javascript">
+        window.history.forward(1);
+        $(document).ready(function () {
+
+
+            // alert
+            /**/
+            Swal.fire({
+                title: '<strong>提醒您</strong>',
+                icon: 'info',
+                html: '防疫期間一日通行證為<b>當天申請<span style="color:red;">僅限當日有效</span></b>, <br>請勿事前(隔日)申請。 ',
+                showCloseButton: false,
+                showCancelButton: false,
+                focusConfirm: false,
+                confirmButtonText: '知道了'
+            })
+
+
+
+            $("#bout").click(function () {
+                $("#LogOut").submit();  // do log out
+            });
+
+            // change img
+            $('#changeRandomCode').click(function () {
+                var random = Math.random();
+                $('#randomCodeImg').attr("src", 'GetRandomCodeImage?cd=' + random);
+            });
+
+            $('#bsend').click(function (e) {
+                var trim = $.trim($("input[name='idNo']").val());
+                $("input[name='idNo']").val(trim); // for temporary
+                // 先檢查
+                console.log('XXXXXXXXXXXXXXXXXX' + $("#qnrForm").serialize());
+               // e.preventDefault();
+                $.ajax({
+                    url: "ApplyTempPass",
+                    type: "post",
+                    async: false,
+                    cache: false,
+                    dataType: "json",
+                    data: $("#qnrForm").serialize(),
+                    success: function (response) {
+                        if (typeof response.error !== "undefined" && response.error.length > 0) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: response.error
+                            })
+                        } else {
+                            // success send data
+                            $("input[name='op']").val('1');
+                            $("#qnrForm").submit();
+                        } 
+                        //} else if (typeof response.error !== "undefined" && response.error.length == 0) {
+                        //    // success send data
+                        //    $("input[name='op']").val('1');
+                        //    $("#qnrForm").submit();
+                        //} else {
+                        //    alert('[x]error');
+                        //}
+                    },
+                    error: function () {
+                        alert("[X]error");
+                    },
+                });
+            });
+        });
+    </script>
+
+}

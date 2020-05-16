@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OneDayPassDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Pass">
+    <Key>
+      <PropertyRef Name="sn" />
+    </Key>
+    <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="mobile" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="visitUnit" Type="String" MaxLength="59" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="idNo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="Parties" Relationship="OneDayPassDBModel.FK_Party_Pass" FromRole="Pass" ToRole="Party" />
+  </EntityType>
+  <EntityContainer Name="OneDayPassDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Passes" EntityType="Self.Pass" />
+    <EntitySet Name="Parties" EntityType="OneDayPassDBModel.Party" />
+    <AssociationSet Name="FK_Party_Pass" Association="OneDayPassDBModel.FK_Party_Pass">
+      <End Role="Pass" EntitySet="Passes" />
+      <End Role="Party" EntitySet="Parties" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Party">
+    <Key>
+      <PropertyRef Name="sn" />
+    </Key>
+    <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="userSn" Type="Int32" Nullable="false" />
+    <Property Name="abc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Pass" Relationship="OneDayPassDBModel.FK_Party_Pass" FromRole="Party" ToRole="Pass" />
+  </EntityType>
+  <Association Name="FK_Party_Pass">
+    <End Type="OneDayPassDBModel.Pass" Role="Pass" Multiplicity="1" />
+    <End Type="OneDayPassDBModel.Party" Role="Party" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pass">
+        <PropertyRef Name="sn" />
+      </Principal>
+      <Dependent Role="Party">
+        <PropertyRef Name="userSn" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

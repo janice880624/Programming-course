@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OneDayPassDBModelStoreContainer" CdmEntityContainer="OneDayPassDBEntities">
+    <EntitySetMapping Name="Passes">
+      <EntityTypeMapping TypeName="OneDayPassDBModel.Pass">
+        <MappingFragment StoreEntitySet="Pass">
+          <ScalarProperty Name="sn" ColumnName="sn" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="mobile" ColumnName="mobile" />
+          <ScalarProperty Name="visitUnit" ColumnName="visitUnit" />
+          <ScalarProperty Name="idNo" ColumnName="idNo" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parties">
+      <EntityTypeMapping TypeName="OneDayPassDBModel.Party">
+        <MappingFragment StoreEntitySet="Party">
+          <ScalarProperty Name="abc" ColumnName="abc" />
+          <ScalarProperty Name="userSn" ColumnName="userSn" />
+          <ScalarProperty Name="sn" ColumnName="sn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
