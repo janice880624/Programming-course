@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneDayPassApps", "OneDayPassApps\OneDayPassApps.csproj", "{0F6672D6-3D81-4D59-B42F-CC11BA13D94C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneDayPassApps.Tests", "OneDayPassApps.Tests\OneDayPassApps.Tests.csproj", "{413B2A30-FD3E-47E4-ACBB-EFAAA8C8C068}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0F6672D6-3D81-4D59-B42F-CC11BA13D94C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F6672D6-3D81-4D59-B42F-CC11BA13D94C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F6672D6-3D81-4D59-B42F-CC11BA13D94C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F6672D6-3D81-4D59-B42F-CC11BA13D94C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{413B2A30-FD3E-47E4-ACBB-EFAAA8C8C068}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{413B2A30-FD3E-47E4-ACBB-EFAAA8C8C068}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{413B2A30-FD3E-47E4-ACBB-EFAAA8C8C068}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{413B2A30-FD3E-47E4-ACBB-EFAAA8C8C068}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B2269B5-D5E9-4AA4-9ACB-F851FA3AE9A7}
+	EndGlobalSection
+EndGlobal
