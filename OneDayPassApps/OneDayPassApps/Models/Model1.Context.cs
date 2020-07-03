@@ -26,6 +26,6 @@ namespace OneDayPassApps.Models
         }
     
         public virtual DbSet<Pass> Pass { get; set; }
-        public virtual DbSet<Table_1> Table_1 { get; set; }
+        public virtual DbSet<VerifyTable> VerifyTables { get; set; }
     }
 }

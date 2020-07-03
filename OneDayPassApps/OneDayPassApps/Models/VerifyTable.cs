@@ -12,11 +12,12 @@ namespace OneDayPassApps.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Table_1
+    public partial class VerifyTable
     {
+        public int sn { get; set; }
         public int id { get; set; }
-        public string userID { get; set; }
-        public string abc { get; set; }
+        public string code { get; set; }
+        public string verifyCode { get; set; }
     
         public virtual Pass Pass { get; set; }
     }

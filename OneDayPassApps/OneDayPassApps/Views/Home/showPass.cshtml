@@ -1,0 +1,137 @@
+﻿
+@model OneDayPassApps.Models.Pass
+@{
+    ViewBag.Title = "OneDayPass";
+}
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-danger">
+                <div class="cnrflash">
+                    <div class="cnrflash-inner">
+                        <span class="cnrflash-label">訪客<br> guest</span>
+                    </div>
+                </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title text-left">109 臺北科技大學 防疫期間通行證</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="the-price">
+                        <h1><span class="subscript"> @Model.createDate.ToString("MM") 月</span>@Model.createDate.ToString("dd")<span class="subscript">日</span></h1>
+                        <small><span id="clock"></span></small>
+                    </div>
+                    <!--
+                    <div class="the-price">
+                        <img id="qrCodeImg" src='GetCreateQRCode'/>
+                    </div> -->
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-danger"><strong>您的大名：@Model.userName</strong></li>
+                        <li class="list-group-item">
+                            身分證字號：<strong> @Model.idNo </strong>
+                        </li>
+                        <li class="list-group-item">手機號碼：@Model.phone</li>
+                        <li class="list-group-item">拜訪單位:@Model.visitUnit</li>
+                        <li class="list-group-item list-group-item-danger"><small><span class="glyphicon glyphicon-ban-circle"></span> 請勿冒用身分使用或偽造通行!</small></li>
+                    </ul>
+                </div>
+                <div class="panel-footer text-primary">
+                    畫面將<span id="demo"></span>後結束
+                    <!--  <button type="button" class="btn btn-primary btn-sm" id="bout" style="float: right"> Exit</button></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="LogOut" id="LogOut" method="post"></form>
+    <!-- js library -->
+
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <!-- temp js -->
+    <script type="text/javascript">
+        window.history.forward(1);
+        // ready
+        $(document).ready(function () {
+
+            function disableBack() { window.history.forward() }
+            window.onload = disableBack();
+            window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+
+            // change corner color
+            var bgcolor = '#bf4aa8';
+            $('.cnrflash-inner').css('background-color', bgcolor);
+            $('html').css('background', '#def2de');
+            $('body').css('background', '#def2de');
+
+            $("#bout").click(function () {
+                $("#LogOut").submit();  // do log out
+            });
+            var form = new FormData();
+            var settings = {
+                "url": "http://api.message.net.tw/send.php?id=0937018681&password=Tkd@0328kid&tel=0937018681&msg=Test one Day pass&mtype=G",
+                "method": "POST",
+                "timeout": 0,
+                "processData": false,
+                "mimeType": "multipart/form-data",
+                "contentType": false,
+                "data": form
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+        });
+
+        // testing auto log out
+        var endDateTime = new Date('2020/07/03 19:17:30').getTime(); // END TIME
+        setInterval("checkAutoLogOut()", 1000)
+        function checkAutoLogOut() {
+            var checknowDay = new Date().getTime();
+            var distance01 = endDateTime - checknowDay;
+            if (distance01 < 0) {
+                $("#LogOut").submit();
+            }
+        }
+
+        // timber 1
+        function getCurrentTime() {
+            var current = new Date();
+            var currentHour = current.getHours();
+            var currentMinute = current.getMinutes();
+            var currentSecond = current.getSeconds();
+            var show = currentHour + ' 時 ' + currentMinute + ' 分 ' + currentSecond + ' 秒';
+            document.getElementById('clock').innerHTML = show;
+        }
+        setInterval("getCurrentTime()", 1000)
+
+        // Set the date counting down to
+        var dt = new Date();
+        dt.setMinutes(dt.getMinutes() + 10);
+
+        // Update the count down every 1 second
+        var x = setInterval(function () {
+            var now = new Date().getTime(); // today's date and time
+            var distance = dt - now; // the distance between now and the count down date
+
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            //  days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            document.getElementById("demo").innerHTML = minutes + "分" + seconds + "秒";
+
+            // when over
+            if (distance < 0) {
+                clearInterval(x);
+                $("#LogOut").submit();  // do log out
+            }
+        }, 1000);
+    </script>
+    <script type="text/javascript" src="https://font.ntut.edu.tw/wfs/js/lib/wfs.js"></script>
+
+    <h2>showPass</h2>
+

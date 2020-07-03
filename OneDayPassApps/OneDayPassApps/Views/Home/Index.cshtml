@@ -1,17 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Layout = "";
 }
 
-
 <div id="fillForm">
-    <form id="qnrForm" action="savePass" method="post">
+    <form id="qnrForm" action="/home/OneDayPass" method="post">
         <input type="hidden" name="op" value="0">
         <div class="container">
             <div class="jumbotron">
-                <h4> NTUT_TKD 校園新冠肺炎健康關懷問卷 NTUT_TKD COVID-19 Survey</h4>
+                <h4>臺北科技大學 校園新冠肺炎健康關懷問卷 NTUT COVID-19 Survey</h4>
                 <p class="lead">
                     您好，為因應「新冠肺炎」疫情，請協助我們填寫下列資料，並詳細閱讀注意事項。
-                    本社基於COVID-19防疫及事後追蹤需求，必須取得您的個人資料，個資當事人不得拒絕提供資料，並應確認資料正確性，如未提供個人資料，不得進入本校。
+                    本校基於COVID-19防疫及事後追蹤需求，必須取得您的個人資料，個資當事人不得拒絕提供資料，並應確認資料正確性，如未提供個人資料，不得進入本校。
                 </p>
             </div>
 
@@ -72,7 +71,7 @@
                             </div>
                             <hr>
                             <div class="form-group row text-danger text-center">
-                                <div class="col-sm-12" class="checkbox">
+                                <div class="col-sm-12" >
                                     <h4><label><input type="checkbox" id="agree" name="agree" value="Y">　<strong>本人已確認上述個人資料正確性</strong></label></h4>
                                 </div>
                             </div>
@@ -167,7 +166,7 @@
                 console.log('XXXXXXXXXXXXXXXXXX' + $("#qnrForm").serialize());
                 // e.preventDefault();
                 $.ajax({
-                    url: "ApplyTempPass",
+                    url: "/home/ApplyTempPass",
                     type: "post",
                     async: false,
                     cache: false,
@@ -200,5 +199,4 @@
             });
         });
     </script>
-
 }

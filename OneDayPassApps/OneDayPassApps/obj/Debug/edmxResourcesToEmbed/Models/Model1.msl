@@ -15,12 +15,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Table_1">
-      <EntityTypeMapping TypeName="OneDayPassModel.Table_1">
-        <MappingFragment StoreEntitySet="Table_1">
+    <EntitySetMapping Name="VerifyTables">
+      <EntityTypeMapping TypeName="OneDayPassModel.VerifyTable">
+        <MappingFragment StoreEntitySet="VerifyTable">
+          <ScalarProperty Name="verifyCode" ColumnName="verifyCode" />
+          <ScalarProperty Name="code" ColumnName="code" />
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="userID" ColumnName="userID" />
-          <ScalarProperty Name="abc" ColumnName="abc" />
+          <ScalarProperty Name="sn" ColumnName="sn" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

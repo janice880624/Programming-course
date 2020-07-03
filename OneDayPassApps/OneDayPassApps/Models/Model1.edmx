@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OneDayPassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OneDayPassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Pass">
           <Key>
             <PropertyRef Name="id" />
@@ -18,36 +18,36 @@
           <Property Name="address" Type="nvarchar" MaxLength="100" />
           <Property Name="createDate" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="Table_1">
+        <EntityType Name="VerifyTable">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="sn" />
           </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userID" Type="nchar" MaxLength="10" />
-          <Property Name="abc" Type="nchar" MaxLength="10" />
+          <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="code" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="verifyCode" Type="nchar" MaxLength="10" />
         </EntityType>
-        <Association Name="FK_Table_1_Table_1">
+        <Association Name="FK_VerifyTable_Pass">
           <End Role="Pass" Type="Self.Pass" Multiplicity="1" />
-          <End Role="Table_1" Type="Self.Table_1" Multiplicity="0..1" />
+          <End Role="VerifyTable" Type="Self.VerifyTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pass">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Table_1">
+            <Dependent Role="VerifyTable">
               <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OneDayPassModelStoreContainer">
           <EntitySet Name="Pass" EntityType="Self.Pass" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Table_1" EntityType="Self.Table_1" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
+          <EntitySet Name="VerifyTable" EntityType="Self.VerifyTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_VerifyTable_Pass" Association="Self.FK_VerifyTable_Pass">
             <End Role="Pass" EntitySet="Pass" />
-            <End Role="Table_1" EntitySet="Table_1" />
+            <End Role="VerifyTable" EntitySet="VerifyTable" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OneDayPassModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -63,37 +63,38 @@
           <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Table_1" Relationship="Self.FK_Table_1_Table_1" FromRole="Pass" ToRole="Table_1" />
+          <NavigationProperty Name="VerifyTables" Relationship="OneDayPassModel.FK_VerifyTable_Pass" FromRole="Pass" ToRole="VerifyTable" />
         </EntityType>
-        <EntityType Name="Table_1">
+        <EntityContainer Name="OneDayPassEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pass" EntityType="Self.Pass" />
+          <EntitySet Name="VerifyTables" EntityType="OneDayPassModel.VerifyTable" />
+          <AssociationSet Name="FK_VerifyTable_Pass" Association="OneDayPassModel.FK_VerifyTable_Pass">
+            <End Role="Pass" EntitySet="Pass" />
+            <End Role="VerifyTable" EntitySet="VerifyTables" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="VerifyTable">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="sn" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="abc" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Pass" Relationship="Self.FK_Table_1_Table_1" FromRole="Table_1" ToRole="Pass" />
+          <Property Name="sn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="verifyCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Pass" Relationship="OneDayPassModel.FK_VerifyTable_Pass" FromRole="VerifyTable" ToRole="Pass" />
         </EntityType>
-        <Association Name="FK_Table_1_Table_1">
-          <End Role="Pass" Type="Self.Pass" Multiplicity="1" />
-          <End Role="Table_1" Type="Self.Table_1" Multiplicity="0..1" />
+        <Association Name="FK_VerifyTable_Pass">
+          <End Type="OneDayPassModel.Pass" Role="Pass" Multiplicity="1" />
+          <End Type="OneDayPassModel.VerifyTable" Role="VerifyTable" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Pass">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="Table_1">
+            <Dependent Role="VerifyTable">
               <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="OneDayPassEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Pass" EntityType="Self.Pass" />
-          <EntitySet Name="Table_1" EntityType="Self.Table_1" />
-          <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
-            <End Role="Pass" EntitySet="Pass" />
-            <End Role="Table_1" EntitySet="Table_1" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -114,12 +115,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Table_1">
-            <EntityTypeMapping TypeName="OneDayPassModel.Table_1">
-              <MappingFragment StoreEntitySet="Table_1">
+          <EntitySetMapping Name="VerifyTables">
+            <EntityTypeMapping TypeName="OneDayPassModel.VerifyTable">
+              <MappingFragment StoreEntitySet="VerifyTable">
+                <ScalarProperty Name="verifyCode" ColumnName="verifyCode" />
+                <ScalarProperty Name="code" ColumnName="code" />
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="userID" ColumnName="userID" />
-                <ScalarProperty Name="abc" ColumnName="abc" />
+                <ScalarProperty Name="sn" ColumnName="sn" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -137,7 +139,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="無" />

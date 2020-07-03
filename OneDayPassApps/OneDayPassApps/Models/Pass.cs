@@ -14,6 +14,12 @@ namespace OneDayPassApps.Models
     
     public partial class Pass
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Pass()
+        {
+            this.VerifyTables = new HashSet<VerifyTable>();
+        }
+    
         public int id { get; set; }
         public string userName { get; set; }
         public string phone { get; set; }
@@ -23,6 +29,7 @@ namespace OneDayPassApps.Models
         public string address { get; set; }
         public System.DateTime createDate { get; set; }
     
-        public virtual Table_1 Table_1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VerifyTable> VerifyTables { get; set; }
     }
 }

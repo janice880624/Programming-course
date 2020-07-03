@@ -13,32 +13,33 @@
     <Property Name="address" Type="nvarchar" MaxLength="100" />
     <Property Name="createDate" Type="date" Nullable="false" />
   </EntityType>
-  <EntityType Name="Table_1">
+  <EntityType Name="VerifyTable">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="sn" />
     </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="userID" Type="nchar" MaxLength="10" />
-    <Property Name="abc" Type="nchar" MaxLength="10" />
+    <Property Name="sn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="code" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="verifyCode" Type="nchar" MaxLength="10" />
   </EntityType>
-  <Association Name="FK_Table_1_Table_1">
+  <Association Name="FK_VerifyTable_Pass">
     <End Role="Pass" Type="Self.Pass" Multiplicity="1" />
-    <End Role="Table_1" Type="Self.Table_1" Multiplicity="0..1" />
+    <End Role="VerifyTable" Type="Self.VerifyTable" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Pass">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Table_1">
+      <Dependent Role="VerifyTable">
         <PropertyRef Name="id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="OneDayPassModelStoreContainer">
     <EntitySet Name="Pass" EntityType="Self.Pass" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="Table_1" EntityType="Self.Table_1" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
+    <EntitySet Name="VerifyTable" EntityType="Self.VerifyTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_VerifyTable_Pass" Association="Self.FK_VerifyTable_Pass">
       <End Role="Pass" EntitySet="Pass" />
-      <End Role="Table_1" EntitySet="Table_1" />
+      <End Role="VerifyTable" EntitySet="VerifyTable" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
